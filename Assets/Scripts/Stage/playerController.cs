@@ -6,16 +6,14 @@ public class playerController : MonoBehaviour {
 
     public GameObject manager;
     private int direction;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     public bool holding;
     public GameObject[] interactiveObj;
 
 	// Use this for initialization
 	void Start () {
         direction = 2;
-        x = 0;
-        y = 0;
         interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
 	}
 
@@ -23,7 +21,7 @@ public class playerController : MonoBehaviour {
     {
         for (int i = 0; i < interactiveObj.Length; i++)
         {
-            if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == spacex)
+            if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == -spacex)
             {
                 return interactiveObj[i];
             }
