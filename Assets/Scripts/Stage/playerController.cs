@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour {
     public int x;
     public int y;
     public bool holding;
+    public string scene;
     public GameObject[] interactiveObj;
 
 	// Use this for initialization
@@ -33,6 +34,11 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        var goal = GameObject.FindGameObjectWithTag("Goal");
+        if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
+        {
+            SceneManager.LoadScene(scene);
+        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (direction != 0)
