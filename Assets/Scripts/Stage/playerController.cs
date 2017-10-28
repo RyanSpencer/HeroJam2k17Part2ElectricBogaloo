@@ -8,13 +8,29 @@ public class playerController : MonoBehaviour {
     private int direction;
     private int x;
     private int y;
+    public bool holding;
+    public GameObject[] interactiveObj;
 
 	// Use this for initialization
 	void Start () {
         direction = 2;
         x = 0;
         y = 0;
+        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
 	}
+
+    GameObject checkSpace(int spacex, int spacey)
+    {
+        for (int i = 0; i < interactiveObj.Length; i++)
+        {
+            if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == spacex)
+            {
+                return interactiveObj[i];
+            }
+        }
+
+        return new GameObject();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -65,6 +81,56 @@ public class playerController : MonoBehaviour {
                     x++;
                     this.gameObject.transform.Translate(new Vector3(1, 0));
                 }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            switch (direction)
+            {
+                case 0:
+                    if (y - 1 >= 0 && !holding)
+                    {
+                        if (manager.GetComponent<Stage>().stage1[y - 1, x] == 2)
+                        {
+                            holding = true;
+                            manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        }
+                    }
+                    break;
+                case 1:
+                    if (x - 1 >= 0 && !holding)
+                    {
+                        if (manager.GetComponent<Stage>().stage1[y, x - 1] == 2)
+                        {
+                            holding = true;
+                            manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        }
+                    }
+                    break;
+                case 2:
+                    if (y + 1 >= 0 && !holding)
+                    {
+                        if (manager.GetComponent<Stage>().stage1[y + 1, x] == 2)
+                        {
+                            holding = true;
+                            manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        }
+                    }
+                    break;
+                case 3:
+                    if (x + 1 >= 0 && !holding)
+                    {
+                        if (manager.GetComponent<Stage>().stage1[y, x + 1] == 2)
+                        {
+                            holding = true;
+                            manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                            checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
+                        }
+                    }
+                    break;
+                default:
+                    print("This shouldn't happen");
+                    break;
             }
         }
 	}

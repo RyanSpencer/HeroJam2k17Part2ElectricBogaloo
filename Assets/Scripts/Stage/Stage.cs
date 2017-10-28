@@ -11,7 +11,7 @@ public class Stage : MonoBehaviour {
 	void Start () {
 
         stage1 = new int[4,4]{
-            { 0,0,0,0 },
+            { 0,0,0,2 },
             { 0,0,1,0 },
             { 1,0,0,0 },
             { 0,0,0,1 }
