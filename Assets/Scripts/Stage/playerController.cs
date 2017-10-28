@@ -94,6 +94,7 @@ public class playerController : MonoBehaviour {
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                            checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         }
                     }
                     break;
@@ -104,6 +105,7 @@ public class playerController : MonoBehaviour {
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                            checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         }
                     }
                     break;
@@ -114,6 +116,7 @@ public class playerController : MonoBehaviour {
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                            checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         }
                     }
                     break;
