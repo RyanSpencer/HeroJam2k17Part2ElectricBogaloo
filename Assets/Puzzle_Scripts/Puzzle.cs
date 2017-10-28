@@ -31,36 +31,4 @@ public class Puzzle : MonoBehaviour {
 		
 	}
 
-    /*public bool interactDoor() {
-
-        bool doorBool;
-
-        return doorBool;
-
-    }
-
-    public bool interactBush() {
-
-        bool bushBool;
-
-        return bushBool;
-
-    }
-
-    public bool interactPlate() {
-
-        bool plateBool;
-
-        return plateBool;
-
-    }
-
-    public bool interactWire() {
-
-        bool wireBool;
-
-        return wireBool;
-
-    }*/
-
 }

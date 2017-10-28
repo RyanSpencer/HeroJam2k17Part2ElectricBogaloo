@@ -29,4 +29,33 @@ public class Puzzle_Manager : MonoBehaviour {
 
 
     }
+
+    public bool interactDoor()
+    {
+
+        return true;
+
+    }
+
+    public bool interactBush()
+    {
+
+        return true;
+
+    }
+
+    public bool interactPlate()
+    {
+
+        return true;
+
+    }
+
+    public bool interactWire()
+    {
+
+        return true;
+
+    }
+
 }
