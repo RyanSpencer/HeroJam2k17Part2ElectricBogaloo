@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour {
 
@@ -34,50 +35,74 @@ public class playerController : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            direction = 0;
-            if (y - 1 >= 0)
+            if (direction != 0)
             {
-                if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0)
+                direction = 0;
+            }
+            else
+            {
+                if (y - 1 >= 0)
                 {
-                    y--;
-                    this.gameObject.transform.Translate(new Vector3(0, 1));
+                    if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0)
+                    {
+                        y--;
+                        this.gameObject.transform.Translate(new Vector3(0, 1));
 
+                    }
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            direction = 1;
-            if (x - 1 >= 0)
+            if (direction != 1)
             {
-                if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0)
+                direction = 1;
+            }
+            else
+            {
+                if (x - 1 >= 0)
                 {
-                    x--;
-                    this.gameObject.transform.Translate(new Vector3(-1, 0));
+                    if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0)
+                    {
+                        x--;
+                        this.gameObject.transform.Translate(new Vector3(-1, 0));
+                    }
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            direction = 2;
-            if (y + 1 <= 3)
+            if (direction != 2)
             {
-                if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0)
+                direction = 2;
+            }
+            else
+            {
+                if (y + 1 <= 3)
                 {
-                    y++;
-                    this.gameObject.transform.Translate(new Vector3(0, -1));
+                    if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0)
+                    {
+                        y++;
+                        this.gameObject.transform.Translate(new Vector3(0, -1));
+                    }
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            direction = 3;
-            if (x + 1 <= 3)
+            if (direction != 3)
             {
-                if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0)
+                direction = 3;
+            }
+            else
+            {
+                if (x + 1 <= 3)
                 {
-                    x++;
-                    this.gameObject.transform.Translate(new Vector3(1, 0));
+                    if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0)
+                    {
+                        x++;
+                        this.gameObject.transform.Translate(new Vector3(1, 0));
+                    }
                 }
             }
         }
