@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour {
 
+    public int[,] stage1;
+
+
 	// Use this for initialization
 	void Start () {
 
-        int[,] stage1 = new int[4,4]{
-            { 0,0,0,0 },
+        stage1 = new int[4,4]{
+            { 0,0,0,2 },
             { 0,0,1,0 },
             { 1,0,0,0 },
             { 0,0,0,1 }
