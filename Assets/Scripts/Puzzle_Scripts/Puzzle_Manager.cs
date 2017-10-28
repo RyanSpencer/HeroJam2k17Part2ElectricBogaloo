@@ -24,8 +24,7 @@ public class Puzzle_Manager : MonoBehaviour {
 		
 	}
 
-    public void puzzleInteract(Puzzle objOne, Puzzle objTwo) {
-
+    public void puzzleInteract() {
 
 
     }
