@@ -11,9 +11,8 @@ public class Stage : MonoBehaviour {
     public int[,] stage5;
 
 
-    // Use this for initialization
-    void Start () {
-
+    private void Awake()
+    {
         stage1 = new int[11, 7]{
             { 2,2,2,5,2,2,2 },
             { 1,1,1,1,1,1,1 },
@@ -83,6 +82,14 @@ public class Stage : MonoBehaviour {
             { 1,1,1,3,1,1,1 },
             { 2,2,2,4,2,2,2 }
         };
+    }
+
+    // Use this for initialization
+    void Start () {
+
+
+
+        
 
     }
 	
