@@ -331,7 +331,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (y + 1 < 11)
+                if (y + 1 < relArray.GetLength(0))
                 {
 
                     if (relArray[y + 1, x] == 0 || relArray[y + 1, x] == 8 || relArray[y - 1, x] == 5)
@@ -369,7 +369,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (x + 1 < 7)
+                if (x + 1 < relArray.GetLength(1))
                 {
 
                     if (relArray[y, x + 1] == 0 || relArray[y, x + 1] == 8 || relArray[y - 1, x] == 5)
