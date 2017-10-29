@@ -17,7 +17,7 @@ public class LevelCreator : MonoBehaviour {
 	}
 
 
-    void CreateLevel(int[,] stage)
+    public void CreateLevel(int[,] stage)
     {
         for (int i = 0; i < stage.GetLength(0); ++i)
         {

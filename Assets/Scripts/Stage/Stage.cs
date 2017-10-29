@@ -10,9 +10,12 @@ public class Stage : MonoBehaviour {
     public int[,] stage4;
     public int[,] stage5;
 
+    public int currentStage;
+
 
     private void Awake()
     {
+        currentStage = 1;
         stage1 = new int[11, 7]{
             { 2,2,2,5,2,2,2 },
             { 1,1,1,14,1,1,1 },
