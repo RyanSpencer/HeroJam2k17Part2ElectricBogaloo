@@ -22,10 +22,17 @@ public class playerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         direction = 2;
-        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
-        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+
         pzMan = gameObject.AddComponent(typeof(Puzzle_Manager)) as Puzzle_Manager;
 	}
+
+    public void lookAtLevel()
+    {
+
+        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+
+    }
 
     public GameObject checkSpace(int spacex, int spacey)
     {
@@ -137,6 +144,8 @@ public class playerController : MonoBehaviour {
         var goal = GameObject.FindGameObjectWithTag("Goal");
         if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
         {
+            LevelCreator myLevelCreator = new LevelCreator();
+            myLevelCreator.DeleteLevel(manager.GetComponent<Stage>().stage1);
             loadNewLevel();
         }
         if (Input.GetKeyDown(KeyCode.W))

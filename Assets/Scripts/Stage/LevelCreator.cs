@@ -5,9 +5,12 @@ using UnityEngine;
 public class LevelCreator : MonoBehaviour {
 
     public GameObject squarePrefab;
+    public List<GameObject> quadList;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start () {
+        quadList = new List<GameObject>();
         CreateLevel(GameObject.Find("GameManager").GetComponent<Stage>().stage1);
     }
 	
@@ -16,7 +19,7 @@ public class LevelCreator : MonoBehaviour {
 		
 	}
 
-
+    // Creates the stage out of quads
     public void CreateLevel(int[,] stage)
     {
         for (int i = 0; i < stage.GetLength(0); ++i)
@@ -25,14 +28,25 @@ public class LevelCreator : MonoBehaviour {
             {
                 GameObject currentSquare = Instantiate(squarePrefab);
                 currentSquare.transform.Translate(new Vector2(-5, 2));
-
-                print(stage[i, j]);
+                quadList.Add(currentSquare);
+                
                 ModifyQuad(currentSquare, stage[i,j], -i, j);
             }
         }
+
+        Debug.Log(player);  
+        player.GetComponent<playerController>().lookAtLevel();
     }
 
 
+    // Deletes the quads on the screen
+    public void DeleteLevel(int[,] stage)
+    {
+        quadList.RemoveRange(0, quadList.Count);
+    }
+
+
+    // Checks what type of quad to create and assigns it to the passed in quad
     void ModifyQuad(GameObject square, int objectType, int i, int j)
     {
         switch (objectType) {
