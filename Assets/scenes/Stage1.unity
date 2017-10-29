@@ -108,6 +108,75 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &188318044
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 188318046}
+  - component: {fileID: 188318045}
+  m_Layer: 0
+  m_Name: Fire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &188318045
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188318044}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c29fefffbf863be4e9e84350dafa44ef, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.32, y: 0.32}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+--- !u!4 &188318046
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188318044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.912301, y: -9.476799, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141262596
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +212,14 @@ MonoBehaviour:
   holdObj: 0
   interactiveObj: []
   nonInteractiveObj: []
+  pickupObj: []
+  rock: 0
+  matches: 0
+  bucket: 0
+  plate: 0
+  bush: 0
+  generator: 0
+  node: 0
 --- !u!212 &1141262598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -253,6 +330,27 @@ MonoBehaviour:
     type: 2}
   quadList: []
   player: {fileID: 1141262596}
+  t0: {fileID: 21300000, guid: 9bb26c9422dfee94387bfbdd2ceb1d4b, type: 3}
+  t1: {fileID: 21300000, guid: ea79d4f4f9c4a3547803f5f67683e1d9, type: 3}
+  t3: {fileID: 21300000, guid: 9bb26c9422dfee94387bfbdd2ceb1d4b, type: 3}
+  t4: {fileID: 21300000, guid: 438670a863eca9149a19b6a9e484957d, type: 3}
+  t5: {fileID: 21300000, guid: 438670a863eca9149a19b6a9e484957d, type: 3}
+  t6: {fileID: 21300000, guid: 669eda7715830e444810dac5ae09cc46, type: 3}
+  t7: {fileID: 21300000, guid: 6ac6c25137050de48b9808dcdb92972b, type: 3}
+  t8: {fileID: 21300000, guid: dd98a1cdfc9968a40abcb95770bbf13a, type: 3}
+  t9: {fileID: 21300000, guid: 375c7b1a3969e484fbc773fdb8393765, type: 3}
+  t11: {fileID: 21300000, guid: c29fefffbf863be4e9e84350dafa44ef, type: 3}
+  t14: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t15: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t16: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t17: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t18: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t19: {fileID: 21300000, guid: a2499e0c091c15245ad0e8b5317a8eab, type: 3}
+  t20: {fileID: 21300000, guid: 8ebb5c43cfd1c1c409b78b196c7607b0, type: 3}
+  t21: {fileID: 21300000, guid: 8ebb5c43cfd1c1c409b78b196c7607b0, type: 3}
+  t22: {fileID: 21300000, guid: 8ebb5c43cfd1c1c409b78b196c7607b0, type: 3}
+  t23: {fileID: 21300000, guid: 8ebb5c43cfd1c1c409b78b196c7607b0, type: 3}
+  t24: {fileID: 21300000, guid: 8ebb5c43cfd1c1c409b78b196c7607b0, type: 3}
 --- !u!1 &2118850924
 GameObject:
   m_ObjectHideFlags: 0
