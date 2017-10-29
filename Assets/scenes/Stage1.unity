@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1141262597}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 1618201286168690, guid: 18627e7bcabca0c4d815bda84cced2f0,
     type: 2}
+  player: {fileID: 1141262596}
 --- !u!1 &2118850924
 GameObject:
   m_ObjectHideFlags: 0
