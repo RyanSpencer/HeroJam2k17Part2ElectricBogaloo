@@ -5,7 +5,11 @@ using UnityEngine;
 public class LevelCreator : MonoBehaviour {
 
     public GameObject squarePrefab;
+<<<<<<< HEAD
     public List<GameObject> quadList;
+=======
+    public GameObject player;
+>>>>>>> e2589145eabbc9a875f63c52bab3801aba488a0c
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +36,9 @@ public class LevelCreator : MonoBehaviour {
                 ModifyQuad(currentSquare, stage[i,j], -i, j);
             }
         }
+
+        Debug.Log(player);  
+        player.GetComponent<playerController>().lookAtLevel();
     }
 
 

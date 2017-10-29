@@ -23,10 +23,17 @@ public class playerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         direction = 2;
-        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
-        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+
         pzMan = gameObject.AddComponent(typeof(Puzzle_Manager)) as Puzzle_Manager;
 	}
+
+    public void lookAtLevel()
+    {
+
+        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+
+    }
 
     public GameObject checkSpace(int spacex, int spacey)
     {
