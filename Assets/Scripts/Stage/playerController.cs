@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour {
 
     public bool holding;
     public int holdObj;
+    public string scene;
     public GameObject[] interactiveObj;
     public GameObject[] nonInteractiveObj;
 
@@ -87,6 +88,11 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        var goal = GameObject.FindGameObjectWithTag("Goal");
+        if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
+        {
+            SceneManager.LoadScene(scene);
+        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (direction != 0)
@@ -174,7 +180,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (y + 1 <= 3)
+                if (y + 1 <= manager.GetComponent<Stage>().stage1.GetLength(0))
                 {
 
                     if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 || manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
@@ -212,7 +218,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (x + 1 <= 3)
+                if (x + 1 <= manager.GetComponent<Stage>().stage1.GetLength(1))
                 {
 
                     if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 || manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
@@ -246,7 +252,6 @@ public class playerController : MonoBehaviour {
 
             if (!holding)
             {
-
                 pickUP();
 
             }

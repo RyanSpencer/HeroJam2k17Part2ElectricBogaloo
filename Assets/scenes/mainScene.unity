@@ -502,8 +502,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1579226951}
+  x: 0
+  y: 0
   holding: 0
   holdObj: 0
+  scene: test
   interactiveObj: []
   nonInteractiveObj: []
 --- !u!212 &611831263
@@ -915,7 +918,7 @@ GameObject:
   - component: {fileID: 1454040297}
   m_Layer: 0
   m_Name: Square (12)
-  m_TagString: Solid
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
