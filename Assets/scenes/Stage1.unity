@@ -225,11 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4a1bf542cd3bd40b6d921b4a585650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1372744960}
+  manager: {fileID: 0}
   x: 0
   y: 0
   holding: 0
+  holdObj: 0
   interactiveObj: []
+  nonInteractiveObj: []
 --- !u!212 &629084390
 SpriteRenderer:
   m_ObjectHideFlags: 0
