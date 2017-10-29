@@ -27,6 +27,7 @@ public class Stage : MonoBehaviour {
             { 2,2,2,4,2,2,2 }
         };
 
+
         stage2 = new int[11, 7]{
             { 2,2,2,5,2,2,2 },
             { 1,1,1,1,1,1,1 },
