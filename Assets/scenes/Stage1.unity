@@ -220,6 +220,10 @@ MonoBehaviour:
   bush: 0
   generator: 0
   node: 0
+  up: {fileID: 21300000, guid: 53879eb1209ae704ead30652d8951b07, type: 3}
+  down: {fileID: 21300000, guid: b3bc4e4b5fcd051489832b568731276a, type: 3}
+  left: {fileID: 21300000, guid: 3882d3ab7f29d3c488bc5878304fa382, type: 3}
+  right: {fileID: 21300000, guid: c6eba9824761d4e4e89a181b59acf3d4, type: 3}
 --- !u!212 &1141262598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -411,7 +415,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.244379
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -434,7 +438,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118850924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: -4.3, z: -10}
+  m_LocalPosition: {x: 4, y: -6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
