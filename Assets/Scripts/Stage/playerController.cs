@@ -10,42 +10,116 @@ public class playerController : MonoBehaviour {
     private int direction;
     public int x;
     public int y;
+    private int[,] relArray;
 
     private int prevY;
     private int prevX;
 
     public bool holding;
     public int holdObj;
-    public string scene;
     public GameObject[] interactiveObj;
     public GameObject[] nonInteractiveObj;
+    public GameObject[] pickupObj;
+
+    public int rock;
+    public int matches;
+    public int bucket;
+
+    public int plate;
+    public int bush;
+
+    public int generator;
+    public int node;
 
 	// Use this for initialization
 	void Start () {
         direction = 2;
 
         pzMan = gameObject.AddComponent(typeof(Puzzle_Manager)) as Puzzle_Manager;
+
+        relArray = GameObject.Find("GameManager").GetComponent<Stage>().stage1;
 	}
 
     public void lookAtLevel()
     {
 
         interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
-        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Floor");
+        pickupObj = GameObject.FindGameObjectsWithTag("Pickup");
+        assignInt();
 
     }
 
-    public GameObject checkSpace(int spacex, int spacey)
+    public void assignInt() {
+
+        for(int i = 0; i < pickupObj.Length; i++)
+        {
+
+            if(pickupObj[i].gameObject.name == "Rock")
+            {
+
+                rock = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+
+            }
+            if(pickupObj[i].gameObject.name == "Matches")
+            {
+
+                matches = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+
+            }
+            if (pickupObj[i].gameObject.name == "Water")
+            {
+
+                bucket = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+
+            }
+
+        }
+        for(int i = 0; i < interactiveObj.Length; i++)
+        {
+
+            if(interactiveObj[i].gameObject.name == "Plate")
+            {
+
+                plate = relArray[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
+
+            }
+            if (interactiveObj[i].gameObject.name == "Bushes")
+            {
+
+                bush = relArray[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
+
+            }
+
+        }
+
+    }
+
+    public GameObject checkSpace(int spacey, int spacex)
     {
+        for (int i = 0; i < pickupObj.Length; i++)
+        {
+            if (pickupObj[i].transform.position.x == spacex && pickupObj[i].transform.position.y == -spacey)
+            {
+                return pickupObj[i];
+            }
+        }
+
+        return new GameObject();
+    }
+    public GameObject checkTile(int spacey, int spacex)
+    {
+
         for (int i = 0; i < interactiveObj.Length; i++)
         {
-            if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == -spacex)
+            if (interactiveObj[i].transform.position.x == spacex && interactiveObj[i].transform.position.y == -spacey)
             {
                 return interactiveObj[i];
             }
         }
 
         return new GameObject();
+
     }
     public GameObject checkFloor(int spacey, int spacex)
     {
@@ -69,12 +143,30 @@ public class playerController : MonoBehaviour {
         {
             if (nonInteractiveObj[i].transform.position.x == spacey && nonInteractiveObj[i].transform.position.y == -spacex)
             {
-                nonInteractiveObj[i].tag = "Interact";
+                nonInteractiveObj[i].tag = "Pickup";
             }
         }
 
-        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Floor");
         interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
+        pickupObj = GameObject.FindGameObjectsWithTag("Pickup");
+
+    }
+
+    public void setTileTag(int spacex, int spacey)
+    {
+
+        for (int i = 0; i < nonInteractiveObj.Length; i++)
+        {
+            if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == -spacex)
+            {
+                interactiveObj[i].tag = "Interact";
+            }
+        }
+
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Floor");
+        interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
+        pickupObj = GameObject.FindGameObjectsWithTag("Pickup");
 
     }
 
@@ -84,21 +176,73 @@ public class playerController : MonoBehaviour {
         {
             if (interactiveObj[i].transform.position.x == spacey && interactiveObj[i].transform.position.y == -spacex)
             {
-                interactiveObj[i].tag = "Solid";
+                interactiveObj[i].tag = "Floor";
             }
         }
 
+        pickupObj = GameObject.FindGameObjectsWithTag("Pickup");
         interactiveObj = GameObject.FindGameObjectsWithTag("Interact");
-        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Solid");
+        nonInteractiveObj = GameObject.FindGameObjectsWithTag("Floor");
+
+    }
+
+    void loadNewLevel()
+    {
+        Stage temp = GameObject.Find("GameManager").GetComponent<Stage>();
+
+        GameObject.Find("GameManager").GetComponent<LevelCreator>().DeleteLevel();
+
+        temp.currentStage++;
+        //Debug.Log(temp.currentStage);
+        
+        switch(temp.currentStage)
+        {
+            case 2:
+                relArray = temp.stage2;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage2);
+                break;
+            case 3:
+                relArray = temp.stage3;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage3);
+                break;
+            case 4:
+                relArray = temp.stage4;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage4);
+                break;
+            case 5:
+                relArray = temp.stage5;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage5);
+                break; 
+            default:
+                print("This shouldn't happen");
+                break;
+        }
+
+        print(relArray[0,0]);
+
+        for (int i = 0; i < relArray.GetLength(0); i++)
+        {
+            for (int j = 0; j < relArray.GetLength(1); j++)
+            {
+                if (relArray[i,j] == 3)
+                {
+                    this.x = j;
+                    this.y = i;
+                }
+            }
+        }
+        transform.position = new Vector3(this.x, -this.y, -1);
+        holding = false;
+        holdObj = 0;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
         var goal = GameObject.FindGameObjectWithTag("Goal");
-        if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
+        if (transform.position.x == goal.transform.position.x && transform.position.y == goal.transform.position.y) 
         {
-            SceneManager.LoadScene(scene);
+            loadNewLevel();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -112,24 +256,24 @@ public class playerController : MonoBehaviour {
                 if (y - 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 || manager.GetComponent<Stage>().stage1[y - 1, x] == 8)
+                    if (relArray[y - 1, x] == 0 || relArray[y - 1, x] == 8 || relArray[y - 1, x] == 5)
                     {
 
                         prevY = y;
                         y--;
                         this.gameObject.transform.Translate(new Vector3(0, 1));
-                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        if (holdObj == 8 && relArray[prevY, x] == 0 && relArray[y, x] != 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[prevY, x] = 8;
+                            relArray[prevY, x] = 8;
                             checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
                             setSolidTag(prevY, x);
 
                         }
-                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        else if (holdObj == 8 && relArray[y, x] == 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            relArray[y, x] = 0;
                             checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
                             setSolidTag(y, x);
 
@@ -151,23 +295,23 @@ public class playerController : MonoBehaviour {
                 if (x - 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 || manager.GetComponent<Stage>().stage1[y, x - 1] == 8)
+                    if (relArray[y, x - 1] == 0 || relArray[y, x - 1] == 8 || relArray[y - 1, x] == 5)
                     {
                         prevX = x;
                         x--;
                         this.gameObject.transform.Translate(new Vector3(-1, 0));
-                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        if (holdObj == 8 && relArray[y, prevX] == 0 && relArray[y, x] != 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, prevX] = 8;
+                            relArray[y, prevX] = 8;
                             checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
                             setSolidTag(y, prevX);
 
                         }
-                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        else if (holdObj == 8 && relArray[y, x] == 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            relArray[y, x] = 0;
                             checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
                             setSolidTag(y, x);
 
@@ -187,26 +331,26 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (y + 1 <= manager.GetComponent<Stage>().stage1.GetLength(0))
+                if (y + 1 < relArray.GetLength(0))
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 || manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
+                    if (relArray[y + 1, x] == 0 || relArray[y + 1, x] == 8 || relArray[y - 1, x] == 5)
                     {
                         prevY = y;
                         y++;
                         this.gameObject.transform.Translate(new Vector3(0, -1));
-                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        if (holdObj == 8 && relArray[prevY, x] == 0 && relArray[y, x] != 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[prevY, x] = 8;
+                            relArray[prevY, x] = 8;
                             checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
                             setSolidTag(prevY, x);
 
                         }
-                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        else if (holdObj == 8 && relArray[y, x] == 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            relArray[y, x] = 0;
                             checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
                             setSolidTag(y, x);
 
@@ -225,26 +369,26 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (x + 1 <= manager.GetComponent<Stage>().stage1.GetLength(1))
+                if (x + 1 < relArray.GetLength(1))
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 || manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
+                    if (relArray[y, x + 1] == 0 || relArray[y, x + 1] == 8 || relArray[y - 1, x] == 5)
                     {
                         prevX = x;
                         x++;
                         this.gameObject.transform.Translate(new Vector3(1, 0));
-                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        if (holdObj == 8 && relArray[y, prevX] == 0 && relArray[y, x] != 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, prevX] = 8;
+                            relArray[y, prevX] = 8;
                             checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
                             setSolidTag(y, prevX);
 
                         }
-                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        else if (holdObj == 8 && relArray[y, x] == 8)
                         {
 
-                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            relArray[y, x] = 0;
                             checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
                             setSolidTag(y, x);
 
@@ -280,35 +424,35 @@ public class playerController : MonoBehaviour {
             case 0:
                 if (y - 1 >= 0)
                 {
-                    if (manager.GetComponent<Stage>().stage1[y - 1, x] == 2)
+                    if (relArray[y - 1, x] == rock)
                     {
                         holding = true;
-                        holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        holdObj = rock;
+                        relArray[y - 1, x] = 0;
                         checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y - 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 4)
+                    else if (relArray[y - 1, x] == 4)
                     {
                         holding = true;
                         holdObj = 4;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        relArray[y - 1, x] = 0;
                         checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y - 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 5)
+                    else if (relArray[y - 1, x] == 36)
                     {
                         holding = true;
-                        holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 3;
-                        checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.black;
-                        setSolidTag(y - 1, x);
+                        holdObj = rock;
+                        relArray[y - 1, x] = plate;
+                        checkTile(y - 1, x).GetComponent<SpriteRenderer>().color = Color.magenta;
+                        setinteractiveTag(y - 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 8)
+                    else if (relArray[y - 1, x] == 8)
                     {
                         holding = true;
                         holdObj = 8;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        relArray[y - 1, x] = 0;
                         checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y - 1, x);
                     }
@@ -318,35 +462,35 @@ public class playerController : MonoBehaviour {
             case 1:
                 if (x - 1 >= 0)
                 {
-                    if (manager.GetComponent<Stage>().stage1[y, x - 1] == 2)
+                    if (relArray[y, x - 1] == rock)
                     {
                         this.holding = true;
-                        this.holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        this.holdObj = rock;
+                        relArray[y, x - 1] = 0;
                         checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x - 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 4)
+                    else if (relArray[y, x - 1] == 4)
                     {
                         holding = true;
                         holdObj = 4;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        relArray[y, x - 1] = 0;
                         checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x - 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 5)
+                    else if (relArray[y, x - 1] == 36)
                     {
                         holding = true;
-                        holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 3;
-                        checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.black;
-                        setSolidTag(y, x - 1);
+                        holdObj = rock;
+                        relArray[y, x - 1] = plate;
+                        checkTile(y, x - 1).GetComponent<SpriteRenderer>().color = Color.magenta;
+                        setinteractiveTag(y, x - 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 8)
+                    else if (relArray[y, x - 1] == 8)
                     {
                         holding = true;
                         holdObj = 8;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        relArray[y, x - 1] = 0;
                         checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x - 1);
                     }
@@ -355,35 +499,35 @@ public class playerController : MonoBehaviour {
             case 2:
                 if (y + 1 >= 0)
                 {
-                    if (manager.GetComponent<Stage>().stage1[y + 1, x] == 2)
+                    if (relArray[y + 1, x] == rock)
                     {
                         this.holding = true;
-                        this.holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        this.holdObj = rock;
+                        relArray[y + 1, x] = 0;
                         checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y + 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 4)
+                    else if (relArray[y + 1, x] == 4)
                     {
                         holding = true;
                         holdObj = 4;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        relArray[y + 1, x] = 0;
                         checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y + 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 5)
+                    else if (relArray[y + 1, x] == 36)
                     {
                         holding = true;
-                        holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 3;
-                        checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.green;
-                        setSolidTag(y + 1, x);
+                        holdObj = rock;
+                        relArray[y + 1, x] = plate;
+                        checkTile(y + 1, x).GetComponent<SpriteRenderer>().color = Color.magenta;
+                        setinteractiveTag(y + 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
+                    else if (relArray[y + 1, x] == 8)
                     {
                         holding = true;
                         holdObj = 8;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        relArray[y + 1, x] = 0;
                         checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y + 1, x);
                     }
@@ -392,35 +536,35 @@ public class playerController : MonoBehaviour {
             case 3:
                 if (x + 1 >= 0)
                 {
-                    if (manager.GetComponent<Stage>().stage1[y, x + 1] == 2)
+                    if (relArray[y, x + 1] == rock)
                     {
                         this.holding = true;
-                        this.holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                        this.holdObj = rock;
+                        relArray[y, x + 1] = 0;
                         checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x + 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 4)
+                    else if (relArray[y, x + 1] == 4)
                     {
                         holding = true;
                         holdObj = 4;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                        relArray[y, x + 1] = 0;
                         checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x + 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 5)
+                    else if (relArray[y, x + 1] == 36)
                     {
                         holding = true;
-                        holdObj = 2;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 3;
-                        checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.green;
-                        setSolidTag(y, x + 1);
+                        holdObj = rock;
+                        relArray[y, x + 1] = rock;
+                        checkTile(y, x + 1).GetComponent<SpriteRenderer>().color = Color.magenta;
+                        setinteractiveTag(y, x + 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
+                    else if (relArray[y, x + 1] == 8)
                     { 
                         holding = true;
                         holdObj = 8;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                        relArray[y, x + 1] = 0;
                         checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x + 1);
                     }
@@ -443,32 +587,32 @@ public class playerController : MonoBehaviour {
                 if (y - 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 && holdObj == 2)
+                    if (relArray[y - 1, x] == 0 && holdObj == rock)
                     {
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 2;
-                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.yellow;
+                        relArray[y - 1, x] = rock;
+                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
                         setinteractiveTag(y - 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 6 && holdObj == 4)
+                    else if (relArray[y - 1, x] == 6 && holdObj == 4)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 7;
+                        relArray[y - 1, x] = 7;
                         checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y - 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 3 && holdObj == 2)
+                    else if (relArray[y - 1, x] == plate && holdObj == rock)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 5;
-                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.green;
+                        relArray[y - 1, x] = 36;
+                        checkTile(y - 1, x).GetComponent<SpriteRenderer>().color = Color.green;
                         setinteractiveTag(y - 1, x);
 
                     }
@@ -479,32 +623,32 @@ public class playerController : MonoBehaviour {
                 if (x - 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 && holdObj == 2)
+                    if (relArray[y, x - 1] == 0 && holdObj == rock)
                     {
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 2;
-                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.yellow;
+                        relArray[y, x - 1] = rock;
+                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.grey;
                         setinteractiveTag(y, x - 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 6 && holdObj == 4)
+                    else if (relArray[y, x - 1] == 6 && holdObj == 4)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 7;
+                        relArray[y, x - 1] = 7;
                         checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y, x - 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 3 && holdObj == 2)
+                    else if (relArray[y, x - 1] == plate && holdObj == rock)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 5;
-                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.green;
+                        relArray[y, x - 1] = 36;
+                        checkTile(y, x - 1).GetComponent<SpriteRenderer>().color = Color.green;
                         setinteractiveTag(y, x - 1);
 
                     }
@@ -515,32 +659,33 @@ public class playerController : MonoBehaviour {
                 if (y + 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 && holdObj == 2)
+                    if (relArray[y + 1, x] == 0 && holdObj == rock)
                     {
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 2;
-                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.yellow;
+                        relArray[y + 1, x] = rock;
+                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
                         setinteractiveTag(y + 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 6 && holdObj == 4)
+                    else if (relArray[y + 1, x] == 6 && holdObj == 4)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 7;
+                        relArray[y + 1, x] = 7;
                         checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y + 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 3 && holdObj == 2)
+                    else if (relArray[y + 1, x] == plate && holdObj == rock)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 5;
-                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.green;
+
+                        relArray[y + 1, x] = 36;
+                        checkTile(y + 1, x).GetComponent<SpriteRenderer>().color = Color.green;
                         setinteractiveTag(y + 1, x);
 
                     }
@@ -551,32 +696,33 @@ public class playerController : MonoBehaviour {
                 if (x + 1 >= 0)
                 {
 
-                    if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 && holdObj == 2)
+                    if (relArray[y, x + 1] == 0 && holdObj == rock)
                     {
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 2;
-                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.yellow;
+                        relArray[y, x + 1] = rock;
+                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.grey;
                         setinteractiveTag(y, x + 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 6 && holdObj == 4)
+                    else if (relArray[y, x + 1] == 6 && holdObj == 4)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 7;
+                        relArray[y, x + 1] = 7;
                         checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y, x + 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 3 && holdObj == 2)
+
+                    else if (relArray[y, x + 1] == plate && holdObj == rock)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 5;
-                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.green;
+                        relArray[y, x + 1] = 36;
+                        checkTile(y, x + 1).GetComponent<SpriteRenderer>().color = Color.green;
                         setinteractiveTag(y, x + 1);
 
                     }
