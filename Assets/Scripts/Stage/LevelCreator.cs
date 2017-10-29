@@ -64,6 +64,10 @@ public class LevelCreator : MonoBehaviour {
     public void DeleteLevel()
     {
         Debug.Log("help");
+        for (int i = 0; i < quadList.Count; ++i)
+        {
+            Destroy(quadList[i]);
+        }
         quadList.Clear();
     }
 
