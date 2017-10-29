@@ -105,28 +105,28 @@ public class playerController : MonoBehaviour {
                 if (y - 1 >= 0)
                 {
 
-                if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 || manager.GetComponent<Stage>().stage1[y - 1, x] == 8)
-                {
-
-                    prevY = y;
-                    y--;
-                    this.gameObject.transform.Translate(new Vector3(0, 1));
-                    if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                    if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 || manager.GetComponent<Stage>().stage1[y - 1, x] == 8)
                     {
 
-                        manager.GetComponent<Stage>().stage1[prevY, x] = 8;
-                        checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
-                        setSolidTag(prevY, x);
+                        prevY = y;
+                        y--;
+                        this.gameObject.transform.Translate(new Vector3(0, 1));
+                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        {
 
-                    }
-                    else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
-                    {
+                            manager.GetComponent<Stage>().stage1[prevY, x] = 8;
+                            checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                            setSolidTag(prevY, x);
 
-                        manager.GetComponent<Stage>().stage1[y, x] = 0;
-                        checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        setSolidTag(y, x);
+                        }
+                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        {
 
-                    }
+                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
+                            setSolidTag(y, x);
+
+                        }
 
                     }
                 }
@@ -144,29 +144,30 @@ public class playerController : MonoBehaviour {
                 if (x - 1 >= 0)
                 {
 
-                if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 || manager.GetComponent<Stage>().stage1[y, x - 1] == 8)
-                {
-                    prevX = x;
-                    x--;
-                    this.gameObject.transform.Translate(new Vector3(-1, 0));
-                    if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                    if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 || manager.GetComponent<Stage>().stage1[y, x - 1] == 8)
                     {
+                        prevX = x;
+                        x--;
+                        this.gameObject.transform.Translate(new Vector3(-1, 0));
+                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        {
 
-                        manager.GetComponent<Stage>().stage1[y, prevX] = 8;
-                        checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
-                        setSolidTag(y, prevX);
+                            manager.GetComponent<Stage>().stage1[y, prevX] = 8;
+                            checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
+                            setSolidTag(y, prevX);
+
+                        }
+                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        {
+
+                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
+                            setSolidTag(y, x);
+
+                        }
+
 
                     }
-                    else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
-                    {
-
-                        manager.GetComponent<Stage>().stage1[y, x] = 0;
-                        checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        setSolidTag(y, x);
-
-                    }
-
-
                 }
             }
         }
@@ -182,27 +183,28 @@ public class playerController : MonoBehaviour {
                 if (y + 1 <= manager.GetComponent<Stage>().stage1.GetLength(0))
                 {
 
-                if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 || manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
-                {
-                    prevY = y;
-                    y++;
-                    this.gameObject.transform.Translate(new Vector3(0, -1));
-                    if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                    if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 || manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
                     {
+                        prevY = y;
+                        y++;
+                        this.gameObject.transform.Translate(new Vector3(0, -1));
+                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[prevY, x] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        {
 
-                        manager.GetComponent<Stage>().stage1[prevY, x] = 8;
-                        checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
-                        setSolidTag(prevY, x);
+                            manager.GetComponent<Stage>().stage1[prevY, x] = 8;
+                            checkFloor(prevY, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                            setSolidTag(prevY, x);
 
-                    }
-                    else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
-                    {
+                        }
+                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        {
 
-                        manager.GetComponent<Stage>().stage1[y, x] = 0;
-                        checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        setSolidTag(y, x);
+                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
+                            setSolidTag(y, x);
 
 
+                        }
                     }
                 }
             }
@@ -219,28 +221,29 @@ public class playerController : MonoBehaviour {
                 if (x + 1 <= manager.GetComponent<Stage>().stage1.GetLength(1))
                 {
 
-                if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 || manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
-                {
-                    prevX = x;
-                    x++;
-                    this.gameObject.transform.Translate(new Vector3(1, 0));
-                    if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                    if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 || manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
                     {
+                        prevX = x;
+                        x++;
+                        this.gameObject.transform.Translate(new Vector3(1, 0));
+                        if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, prevX] == 0 && manager.GetComponent<Stage>().stage1[y, x] != 8)
+                        {
 
-                        manager.GetComponent<Stage>().stage1[y, prevX] = 8;
-                        checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
-                        setSolidTag(y, prevX);
+                            manager.GetComponent<Stage>().stage1[y, prevX] = 8;
+                            checkFloor(y, prevX).GetComponent<SpriteRenderer>().color = Color.grey;
+                            setSolidTag(y, prevX);
+
+                        }
+                        else if (holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
+                        {
+
+                            manager.GetComponent<Stage>().stage1[y, x] = 0;
+                            checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
+                            setSolidTag(y, x);
+
+                        }
 
                     }
-                    else if(holdObj == 8 && manager.GetComponent<Stage>().stage1[y, x] == 8)
-                    {
-
-                        manager.GetComponent<Stage>().stage1[y, x] = 0;
-                        checkFloor(y, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        setSolidTag(y, x);
-
-                    }
-
                 }
             }
         }
@@ -252,59 +255,13 @@ public class playerController : MonoBehaviour {
                 pickUP();
 
             }
-            else if(holding)
+            else if (holding)
             {
 
                 putDown();
-                case 0:
-                    if (y - 1 >= 0 && !holding)
-                    {
-                        if (manager.GetComponent<Stage>().stage1[y - 1, x] == 6)
-                        {
-                            holding = true;
-                            manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
-                            checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        }
-                    }
-                    break;
-                case 1:
-                    if (x - 1 >= 0 && !holding)
-                    {
-                        if (manager.GetComponent<Stage>().stage1[y, x - 1] == 6)
-                        {
-                            holding = true;
-                            manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
-                            checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
-                        }
-                    }
-                    break;
-                case 2:
-                    if (y + 1 >= 0 && !holding)
-                    {
-                        if (manager.GetComponent<Stage>().stage1[y + 1, x] == 6)
-                        {
-                            holding = true;
-                            manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
-                            checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
-                        }
-                    }
-                    break;
-                case 3:
-                    if (x + 1 >= 0 && !holding)
-                    {
-                        if (manager.GetComponent<Stage>().stage1[y, x + 1] == 6)
-                        {
-                            holding = true;
-                            manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
-                            checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
-                        }
-                    }
-                    break;
-                default:
-                    print("This shouldn't happen");
-                    break;
+
             }
-          
+
         }
 	}
 
