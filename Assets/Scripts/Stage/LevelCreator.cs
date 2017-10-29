@@ -26,7 +26,6 @@ public class LevelCreator : MonoBehaviour {
                 GameObject currentSquare = Instantiate(squarePrefab);
                 currentSquare.transform.Translate(new Vector2(-5, 2));
 
-                print(stage[i, j]);
                 ModifyQuad(currentSquare, stage[i,j], -i, j);
             }
         }
