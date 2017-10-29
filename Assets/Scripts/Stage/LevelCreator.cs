@@ -26,11 +26,11 @@ public class LevelCreator : MonoBehaviour {
         {
             for (int j = 0; j < stage.GetLength(1); ++j)
             {
-                GameObject currentSquare = Instantiate(squarePrefab);
-                currentSquare.transform.Translate(new Vector2(-5, 2));
-                quadList.Add(currentSquare);
+                quadList.Add(Instantiate(squarePrefab));
+                quadList[quadList.Count - 1].transform.Translate(new Vector2(-5, 2));
                 
-                ModifyQuad(currentSquare, stage[i,j], -i, j);
+                
+                ModifyQuad(quadList[quadList.Count - 1], stage[i,j], -i, j);
             }
         }
 
@@ -40,8 +40,9 @@ public class LevelCreator : MonoBehaviour {
 
 
     // Deletes the quads on the screen
-    public void DeleteLevel(int[,] stage)
+    public void DeleteLevel()
     {
+        Debug.Log("help");
         quadList.RemoveRange(0, quadList.Count);
     }
 
