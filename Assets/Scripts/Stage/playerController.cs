@@ -91,7 +91,8 @@ public class playerController : MonoBehaviour {
         var goal = GameObject.FindGameObjectWithTag("Goal");
         if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
         {
-            SceneManager.LoadScene(scene);
+            LevelCreator myLevelCreator = new LevelCreator();
+            myLevelCreator.DeleteLevel(manager.GetComponent<Stage>().stage1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
