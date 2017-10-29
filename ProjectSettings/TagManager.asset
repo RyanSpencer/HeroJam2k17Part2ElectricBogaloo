@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Interact
-  - Solid
-  - Pickup
-  - Goal
-<<<<<<< HEAD
-  - Button
-=======
-  - Ground
-  - Floor
->>>>>>> 289209c958db8650044e17162077590b39da3d46
+  tags: []
   layers:
   - Default
   - TransparentFX
