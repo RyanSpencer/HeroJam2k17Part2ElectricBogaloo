@@ -54,7 +54,7 @@ public class LevelCreator : MonoBehaviour {
             case 0:
                 square.transform.Translate(new Vector2(j, i));
                 square.GetComponent<SpriteRenderer>().color = Color.white;
-                square.tag = "Untagged";
+                square.tag = "Floor";
                 square.name = "Ground";
                 break;
             case 1:

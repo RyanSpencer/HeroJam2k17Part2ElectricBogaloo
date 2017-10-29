@@ -8,6 +8,8 @@ TagManager:
   - Solid
   - Pickup
   - Goal
+  - Ground
+  - Floor
   layers:
   - Default
   - TransparentFX
