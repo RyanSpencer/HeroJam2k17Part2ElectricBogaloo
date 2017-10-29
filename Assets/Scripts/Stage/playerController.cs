@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour {
 
     public int plate;
     public int bush;
+    public int fire;
 
     public int generator;
     public int node;
@@ -87,6 +88,14 @@ public class playerController : MonoBehaviour {
                 bush = manager.GetComponent<Stage>().stage1[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
 
             }
+            if (interactiveObj[i].gameObject.name == "Fire")
+            {
+
+                fire = manager.GetComponent<Stage>().stage1[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
+
+            }
+
+            fire = 11;
 
         }
 
@@ -175,6 +184,16 @@ public class playerController : MonoBehaviour {
             {
                 interactiveObj[i].tag = "Floor";
             }
+
+        }
+        for(int i = 0; i < pickupObj.Length; i++)
+        {
+
+            if (pickupObj[i].transform.position.x == spacey && pickupObj[i].transform.position.y == -spacex)
+            {
+                pickupObj[i].tag = "Floor";
+            }
+
         }
 
         pickupObj = GameObject.FindGameObjectsWithTag("Pickup");
@@ -427,14 +446,24 @@ public class playerController : MonoBehaviour {
                         checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y - 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == matches)
                     {
                         holding = true;
-                        holdObj = 4;
+                        holdObj = matches;
                         manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
                         checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y - 1, x);
                     }
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == bucket)
+                    {
+                        holding = true;
+                        holdObj = bucket;
+                        manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        checkSpace(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y - 1, x);
+                    }
+
+
                     else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 36)
                     {
                         holding = true;
@@ -465,14 +494,25 @@ public class playerController : MonoBehaviour {
                         checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x - 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == matches)
                     {
                         holding = true;
-                        holdObj = 4;
+                        holdObj = matches;
                         manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
                         checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x - 1);
                     }
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == bucket)
+                    {
+                        holding = true;
+                        holdObj = bucket;
+                        manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        checkSpace(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y, x - 1);
+                    }
+
+
+
                     else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 36)
                     {
                         holding = true;
@@ -502,14 +542,25 @@ public class playerController : MonoBehaviour {
                         checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y + 1, x);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == matches)
                     {
                         holding = true;
-                        holdObj = 4;
+                        holdObj = matches;
                         manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
                         checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y + 1, x);
                     }
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == bucket)
+                    {
+                        holding = true;
+                        holdObj = bucket;
+                        manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        checkSpace(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y + 1, x);
+                    }
+
+
+
                     else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 36)
                     {
                         holding = true;
@@ -539,14 +590,25 @@ public class playerController : MonoBehaviour {
                         checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x + 1);
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == matches)
                     {
                         holding = true;
-                        holdObj = 4;
+                        holdObj = matches;
                         manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
                         checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
                         setSolidTag(y, x + 1);
                     }
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == bucket)
+                    {
+                        holding = true;
+                        holdObj = bucket;
+                        manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                        checkSpace(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y, x + 1);
+                    }
+
+
+
                     else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 36)
                     {
                         holding = true;
@@ -591,14 +653,44 @@ public class playerController : MonoBehaviour {
                         setinteractiveTag(y - 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 6 && holdObj == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 && holdObj == matches)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y - 1, x] = matches;
+                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y - 1, x);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 0 && holdObj == bucket)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y - 1, x] = bucket;
+                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y - 1, x);
+
+                    }
+
+
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == bush && holdObj == matches)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y - 1, x] = 7;
+                        manager.GetComponent<Stage>().stage1[y - 1, x] = fire;
                         checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y - 1, x);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y - 1, x] == fire && holdObj == bucket)
+                    {
+
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
+                        checkFloor(y - 1, x).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y - 1, x);
 
                     }
                     else if (manager.GetComponent<Stage>().stage1[y - 1, x] == plate && holdObj == rock)
@@ -627,14 +719,45 @@ public class playerController : MonoBehaviour {
                         setinteractiveTag(y, x - 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 6 && holdObj == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 && holdObj == matches)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x - 1] = matches;
+                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y, x - 1);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 0 && holdObj == bucket)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x - 1] = bucket;
+                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y, x - 1);
+
+                    }
+
+
+
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == bush && holdObj == matches)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x - 1] = 7;
+                        manager.GetComponent<Stage>().stage1[y, x - 1] = fire;
                         checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y, x - 1);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y, x - 1] == fire && holdObj == bucket)
+                    {
+
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
+                        checkFloor(y, x - 1).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y, x - 1);
 
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x - 1] == plate && holdObj == rock)
@@ -663,14 +786,45 @@ public class playerController : MonoBehaviour {
                         setinteractiveTag(y + 1, x);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 6 && holdObj == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 && holdObj == matches)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y + 1, x] = matches;
+                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y + 1, x);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 && holdObj == bucket)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y + 1, x] = bucket;
+                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y + 1, x);
+
+                    }
+
+
+
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == bush && holdObj == matches)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y + 1, x] = 7;
+                        manager.GetComponent<Stage>().stage1[y + 1, x] = fire;
                         checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y + 1, x);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y + 1, x] == fire && holdObj == bucket)
+                    {
+
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
+                        checkFloor(y + 1, x).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y + 1, x);
 
                     }
                     else if (manager.GetComponent<Stage>().stage1[y + 1, x] == plate && holdObj == rock)
@@ -699,14 +853,45 @@ public class playerController : MonoBehaviour {
                         setinteractiveTag(y, x + 1);
 
                     }
-                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 6 && holdObj == 4)
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 && holdObj == matches)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x + 1] = matches;
+                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y, x + 1);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 && holdObj == bucket)
+                    {
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x + 1] = bucket;
+                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.grey;
+                        setinteractiveTag(y, x + 1);
+
+                    }
+
+
+
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == bush && holdObj == matches)
                     {
 
                         holding = false;
                         holdObj = 0;
-                        manager.GetComponent<Stage>().stage1[y, x + 1] = 7;
+                        manager.GetComponent<Stage>().stage1[y, x + 1] = fire;
                         checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.red;
                         setinteractiveTag(y, x + 1);
+
+                    }
+                    else if (manager.GetComponent<Stage>().stage1[y, x + 1] == fire && holdObj == bucket)
+                    {
+
+                        holding = false;
+                        holdObj = 0;
+                        manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
+                        checkFloor(y, x + 1).GetComponent<SpriteRenderer>().color = Color.white;
+                        setSolidTag(y, x + 1);
 
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x + 1] == plate && holdObj == rock)
