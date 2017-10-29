@@ -16,7 +16,6 @@ public class playerController : MonoBehaviour {
 
     public bool holding;
     public int holdObj;
-    public string scene;
     public GameObject[] interactiveObj;
     public GameObject[] nonInteractiveObj;
     public GameObject[] pickupObj;
@@ -183,13 +182,62 @@ public class playerController : MonoBehaviour {
         nonInteractiveObj = GameObject.FindGameObjectsWithTag("Floor");
 
     }
+
+    void loadNewLevel()
+    {
+        Stage temp = GameObject.Find("GameManager").GetComponent<Stage>();
+
+        int[,] searchArray = new int[1, 2]{ { 1, 1 } };
+        temp.currentStage++;
+        
+        switch(temp.currentStage)
+        {
+            case 2:
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage2);
+                searchArray = temp.stage2;
+                break;
+            case 3:
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage3);
+                searchArray = temp.stage3;
+                break;
+            case 4:
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage4);
+                searchArray = temp.stage4;
+                break;
+            case 5:
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage5);
+                searchArray = temp.stage5;
+                break;
+            default:
+                print("This shouldn't happen");
+                break;
+        }
+
+        for (int i = 0; i < searchArray.GetLength(0); i++)
+        {
+            for (int j = 0; j < searchArray.GetLength(1); j++)
+            {
+                if (searchArray[i,j] == 3)
+                {
+                    this.x = j;
+                    this.y = i;
+                }
+            }
+        }
+
+        holding = false;
+        holdObj = 0;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         var goal = GameObject.FindGameObjectWithTag("Goal");
         if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
         {
-            SceneManager.LoadScene(scene);
+            LevelCreator myLevelCreator = new LevelCreator();
+            myLevelCreator.DeleteLevel(manager.GetComponent<Stage>().stage1);
+            loadNewLevel();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -278,7 +326,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (y + 1 <= manager.GetComponent<Stage>().stage1.GetLength(0))
+                if (y + 1 < 11)
                 {
 
                     if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0 || manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
@@ -316,7 +364,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (x + 1 <= manager.GetComponent<Stage>().stage1.GetLength(1))
+                if (x + 1 < 7)
                 {
 
                     if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0 || manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
