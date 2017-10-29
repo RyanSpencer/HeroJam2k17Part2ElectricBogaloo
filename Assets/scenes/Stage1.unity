@@ -141,7 +141,6 @@ MonoBehaviour:
   y: 9
   holding: 0
   holdObj: 0
-  scene: 
   interactiveObj: []
   nonInteractiveObj: []
 --- !u!212 &1141262598
@@ -225,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a09e848dcadf5a429c2dd9f3f035a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStage: 0
 --- !u!4 &1981546728
 Transform:
   m_ObjectHideFlags: 0
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 1618201286168690, guid: 18627e7bcabca0c4d815bda84cced2f0,
     type: 2}
+  quadList: []
   player: {fileID: 1141262596}
 --- !u!1 &2118850924
 GameObject:
