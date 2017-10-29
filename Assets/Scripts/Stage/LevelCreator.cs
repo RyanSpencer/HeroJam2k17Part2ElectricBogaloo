@@ -69,7 +69,7 @@ public class LevelCreator : MonoBehaviour {
             case 5:
                 square.transform.Translate(new Vector2(j, i));
                 square.GetComponent<SpriteRenderer>().color = Color.green;
-                square.tag = "Untagged";
+                square.tag = "Goal";
                 square.name = "PlayerTo";
                 break;
             case 6:
