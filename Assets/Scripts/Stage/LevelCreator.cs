@@ -108,7 +108,7 @@ public class LevelCreator : MonoBehaviour {
                 square.transform.Translate(new Vector2(j, i));
                 square.GetComponent<SpriteRenderer>().color = Color.magenta;
                 square.tag = "Interact";
-                square.name = "Plate";
+                square.name = "Plate1";
                 break;
             case 10:
                 square.transform.Translate(new Vector2(j, i));
@@ -138,67 +138,67 @@ public class LevelCreator : MonoBehaviour {
                 square.transform.Translate(new Vector2(j, i));
                 square.GetComponent<SpriteRenderer>().color = Color.yellow;
                 square.tag = "Interact";
-                square.name = "Gate";
+                square.name = "Gate1";
                 break;
             case 15:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.green;
-                square.tag = "Untagged";
-                square.name = "TopLeftWire";
+                square.GetComponent<SpriteRenderer>().color = Color.gray;
+                square.tag = "Interact";
+                square.name = "Gate2";
                 break;
             case 16:
                 square.transform.Translate(new Vector2(j, i));
                 square.GetComponent<SpriteRenderer>().color = Color.gray;
-                square.tag = "Untagged";
-                square.name = "BottomRightWire";
+                square.tag = "Interact";
+                square.name = "Gate3";
                 break;
             case 17:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.red;
-                square.tag = "Untagged";
-                square.name = "BottomLeftWire";
+                square.GetComponent<SpriteRenderer>().color = Color.gray;
+                square.tag = "Interact";
+                square.name = "Gate4";
                 break;
             case 18:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.blue;
-                square.tag = "Untagged";
-                square.name = "TopRightWire";
+                square.GetComponent<SpriteRenderer>().color = Color.gray;
+                square.tag = "Interact";
+                square.name = "Gate5";
                 break;
             case 19:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.magenta;
-                square.tag = "Untagged";
-                square.name = "StraightUpWire";
+                square.GetComponent<SpriteRenderer>().color = Color.gray;
+                square.tag = "Interact";
+                square.name = "Gate6";
                 break;
             case 20:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.white;
-                square.tag = "Untagged";
-                square.name = "StraightRightWire";
+                square.GetComponent<SpriteRenderer>().color = Color.magenta;
+                square.tag = "Interact";
+                square.name = "Plate2";
                 break;
             case 21:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.cyan;
-                square.tag = "Solid";
-                square.name = "FilledNodeDown";
+                square.GetComponent<SpriteRenderer>().color = Color.magenta;
+                square.tag = "Interact";
+                square.name = "Plate3";
                 break;
             case 22:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.clear;
-                square.tag = "Solid";
-                square.name = "FilledNodeRight";
+                square.GetComponent<SpriteRenderer>().color = Color.magenta;
+                square.tag = "Interact";
+                square.name = "Plate4";
                 break;
             case 23:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.white;
-                square.tag = "Solid";
-                square.name = "FilledNodeUp";
+                square.GetComponent<SpriteRenderer>().color = Color.magenta;
+                square.tag = "Interact";
+                square.name = "Plate5";
                 break;
             case 24:
                 square.transform.Translate(new Vector2(j, i));
-                square.GetComponent<SpriteRenderer>().color = Color.yellow;
-                square.tag = "Solid";
-                square.name = "FilledNodeLeft";
+                square.GetComponent<SpriteRenderer>().color = Color.magenta;
+                square.tag = "Interact";
+                square.name = "Plate6";
                 break;
             case 25:
                 square.transform.Translate(new Vector2(j, i));
