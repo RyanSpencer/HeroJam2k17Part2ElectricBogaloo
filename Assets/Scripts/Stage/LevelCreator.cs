@@ -33,8 +33,7 @@ public class LevelCreator : MonoBehaviour {
                 ModifyQuad(quadList[quadList.Count - 1], stage[i,j], -i, j);
             }
         }
-
-        Debug.Log(player);  
+        
         player.GetComponent<playerController>().lookAtLevel();
     }
 
@@ -43,7 +42,7 @@ public class LevelCreator : MonoBehaviour {
     public void DeleteLevel()
     {
         Debug.Log("help");
-        quadList.RemoveRange(0, quadList.Count);
+        quadList.Clear();
     }
 
 

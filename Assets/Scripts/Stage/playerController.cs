@@ -58,19 +58,19 @@ public class playerController : MonoBehaviour {
             if(pickupObj[i].gameObject.name == "Rock")
             {
 
-                rock = manager.GetComponent<Stage>().stage1[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+                rock = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
 
             }
             if(pickupObj[i].gameObject.name == "Matches")
             {
 
-                matches = manager.GetComponent<Stage>().stage1[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+                matches = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
 
             }
             if (pickupObj[i].gameObject.name == "Water")
             {
 
-                bucket = manager.GetComponent<Stage>().stage1[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
+                bucket = relArray[(int)pickupObj[i].gameObject.transform.position.y * -1, (int)pickupObj[i].gameObject.transform.position.x];
 
             }
 
@@ -81,13 +81,13 @@ public class playerController : MonoBehaviour {
             if(interactiveObj[i].gameObject.name == "Plate")
             {
 
-                plate = manager.GetComponent<Stage>().stage1[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
+                plate = relArray[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
 
             }
             if (interactiveObj[i].gameObject.name == "Bushes")
             {
 
-                bush = manager.GetComponent<Stage>().stage1[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
+                bush = relArray[(int)interactiveObj[i].gameObject.transform.position.y * -1, (int)interactiveObj[i].gameObject.transform.position.x];
 
             }
 
@@ -193,26 +193,26 @@ public class playerController : MonoBehaviour {
         GameObject.Find("GameManager").GetComponent<LevelCreator>().DeleteLevel();
 
         temp.currentStage++;
-        print(temp.currentStage);
+        //Debug.Log(temp.currentStage);
         
         switch(temp.currentStage)
         {
             case 2:
-                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage2);
                 relArray = temp.stage2;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage2);
                 break;
             case 3:
-                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage3);
                 relArray = temp.stage3;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage3);
                 break;
             case 4:
-                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage4);
                 relArray = temp.stage4;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage4);
                 break;
             case 5:
-                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage5);
                 relArray = temp.stage5;
-                break;
+                GameObject.Find("GameManager").GetComponent<LevelCreator>().CreateLevel(temp.stage5);
+                break; 
             default:
                 print("This shouldn't happen");
                 break;
@@ -231,7 +231,7 @@ public class playerController : MonoBehaviour {
                 }
             }
         }
-        this.gameObject.transform.position = new Vector3(this.x, -this.y, -1);
+        transform.position = new Vector3(this.x, -this.y, -1);
         holding = false;
         holdObj = 0;
 
@@ -240,7 +240,7 @@ public class playerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         var goal = GameObject.FindGameObjectWithTag("Goal");
-        if (this.gameObject.transform.position.x == goal.transform.position.x && this.gameObject.transform.position.y == goal.transform.position.y) 
+        if (transform.position.x == goal.transform.position.x && transform.position.y == goal.transform.position.y) 
         {
             loadNewLevel();
         }
