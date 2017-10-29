@@ -7,8 +7,8 @@ public class playerController : MonoBehaviour {
     Puzzle_Manager pzMan;
     public GameObject manager;
     private int direction;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     private int prevY;
     private int prevX;
     public bool holding;
@@ -243,7 +243,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 4)
                     {
-                        Debug.Log("FUCKKLE UP");
                         holding = true;
                         holdObj = 4;
                         manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
@@ -252,7 +251,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 5)
                     {
-                        Debug.Log("FUCKKLE UP");
                         holding = true;
                         holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y - 1, x] = 3;
@@ -261,7 +259,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y - 1, x] == 8)
                     {
-                        Debug.Log("FUCKKLE UP");
                         holding = true;
                         holdObj = 8;
                         manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
@@ -276,7 +273,6 @@ public class playerController : MonoBehaviour {
                 {
                     if (manager.GetComponent<Stage>().stage1[y, x - 1] == 2)
                     {
-                        Debug.Log("FUCKKLE LEFT");
                         this.holding = true;
                         this.holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
@@ -285,7 +281,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 4)
                     {
-                        Debug.Log("FUCKKLE LEFT");
                         holding = true;
                         holdObj = 4;
                         manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
@@ -294,7 +289,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 5)
                     {
-                        Debug.Log("FUCKKLE LEFT");
                         holding = true;
                         holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y, x - 1] = 3;
@@ -303,7 +297,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x - 1] == 8)
                     {
-                        Debug.Log("FUCKKLE LEFT");
                         holding = true;
                         holdObj = 8;
                         manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
@@ -317,7 +310,6 @@ public class playerController : MonoBehaviour {
                 {
                     if (manager.GetComponent<Stage>().stage1[y + 1, x] == 2)
                     {
-                        Debug.Log("FUCKKLE DOWN");
                         this.holding = true;
                         this.holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
@@ -326,7 +318,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 4)
                     {
-                        Debug.Log("FUCKKLE DOWN");
                         holding = true;
                         holdObj = 4;
                         manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
@@ -335,7 +326,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 5)
                     {
-                        Debug.Log("FUCKKLE DOWN");
                         holding = true;
                         holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y + 1, x] = 3;
@@ -344,7 +334,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y + 1, x] == 8)
                     {
-                        Debug.Log("FUCKKLE DOWN");
                         holding = true;
                         holdObj = 8;
                         manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
@@ -358,7 +347,6 @@ public class playerController : MonoBehaviour {
                 {
                     if (manager.GetComponent<Stage>().stage1[y, x + 1] == 2)
                     {
-                        Debug.Log("FUCKKLE RIGHT");
                         this.holding = true;
                         this.holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
@@ -367,7 +355,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 4)
                     {
-                        Debug.Log("FUCKKLE RIGHT");
                         holding = true;
                         holdObj = 4;
                         manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
@@ -376,7 +363,6 @@ public class playerController : MonoBehaviour {
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 5)
                     {
-                        Debug.Log("FUCKKLE RIGHT");
                         holding = true;
                         holdObj = 2;
                         manager.GetComponent<Stage>().stage1[y, x + 1] = 3;
@@ -384,8 +370,7 @@ public class playerController : MonoBehaviour {
                         setSolidTag(y, x + 1);
                     }
                     else if (manager.GetComponent<Stage>().stage1[y, x + 1] == 8)
-                    {
-                        Debug.Log("FUCKKLE RIGHT");
+                    { 
                         holding = true;
                         holdObj = 8;
                         manager.GetComponent<Stage>().stage1[y, x + 1] = 0;

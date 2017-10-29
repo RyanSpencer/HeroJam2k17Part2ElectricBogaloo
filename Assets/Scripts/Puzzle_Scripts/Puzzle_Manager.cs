@@ -29,10 +29,18 @@ public class Puzzle_Manager : MonoBehaviour {
 
     }
 
-    public bool interactDoor()
+    public void interactPlate(playerController plyCon, Stage curStage)
     {
-
-        return true;
+        /*
+        if (plyCon.manager.GetComponent<Stage>().stage1[plyCon.y - 1, plyCon.x] == 2)
+        {
+            plyCon.holding = true;
+            plyCon.holdObj = 2;
+            plyCon.manager.GetComponent<Stage>().stage1[plyCon.y - 1, plyCon.x] = 0;
+            plyCon.checkSpace(plyCon.y - 1, plyCon.x).GetComponent<SpriteRenderer>().color = Color.white;
+            plyCon.setSolidTag(plyCon.y - 1, plyCon.x);
+        }
+        */
 
     }
 
@@ -43,12 +51,12 @@ public class Puzzle_Manager : MonoBehaviour {
 
     }
 
-    public bool interactPlate()
+    /*public bool interactPlate()
     {
 
         return true;
 
-    }
+    }*/
 
     public bool interactWire()
     {

@@ -8,7 +8,7 @@ public class Wire : MonoBehaviour {
 
     private int curLength;
 
-    private int[] wirePath;
+    public LinkedList<int> wire = new LinkedList<int>();
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +28,7 @@ public class Wire : MonoBehaviour {
 
     }
 
-    public void placePath() {
+    public void placePath(int spaceX, int spaceY) {
 
         if (curLength < length)
         {
