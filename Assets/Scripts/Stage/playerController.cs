@@ -84,7 +84,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (y + 1 <= 3)
+                if (y + 1 <= manager.GetComponent<Stage>().stage1.GetLength(0))
                 {
                     if (manager.GetComponent<Stage>().stage1[y + 1, x] == 0)
                     {
@@ -102,7 +102,7 @@ public class playerController : MonoBehaviour {
             }
             else
             {
-                if (x + 1 <= 3)
+                if (x + 1 <= manager.GetComponent<Stage>().stage1.GetLength(1))
                 {
                     if (manager.GetComponent<Stage>().stage1[y, x + 1] == 0)
                     {
@@ -119,7 +119,7 @@ public class playerController : MonoBehaviour {
                 case 0:
                     if (y - 1 >= 0 && !holding)
                     {
-                        if (manager.GetComponent<Stage>().stage1[y - 1, x] == 2)
+                        if (manager.GetComponent<Stage>().stage1[y - 1, x] == 6)
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y - 1, x] = 0;
@@ -130,7 +130,7 @@ public class playerController : MonoBehaviour {
                 case 1:
                     if (x - 1 >= 0 && !holding)
                     {
-                        if (manager.GetComponent<Stage>().stage1[y, x - 1] == 2)
+                        if (manager.GetComponent<Stage>().stage1[y, x - 1] == 6)
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y, x - 1] = 0;
@@ -141,7 +141,7 @@ public class playerController : MonoBehaviour {
                 case 2:
                     if (y + 1 >= 0 && !holding)
                     {
-                        if (manager.GetComponent<Stage>().stage1[y + 1, x] == 2)
+                        if (manager.GetComponent<Stage>().stage1[y + 1, x] == 6)
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y + 1, x] = 0;
@@ -152,7 +152,7 @@ public class playerController : MonoBehaviour {
                 case 3:
                     if (x + 1 >= 0 && !holding)
                     {
-                        if (manager.GetComponent<Stage>().stage1[y, x + 1] == 2)
+                        if (manager.GetComponent<Stage>().stage1[y, x + 1] == 6)
                         {
                             holding = true;
                             manager.GetComponent<Stage>().stage1[y, x + 1] = 0;
