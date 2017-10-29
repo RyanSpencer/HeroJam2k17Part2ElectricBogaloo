@@ -31,6 +31,11 @@ public class playerController : MonoBehaviour {
     public int generator;
     public int node;
 
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
 	// Use this for initialization
 	void Start () {
         direction = 2;
@@ -38,6 +43,7 @@ public class playerController : MonoBehaviour {
         pzMan = gameObject.AddComponent(typeof(Puzzle_Manager)) as Puzzle_Manager;
 
         relArray = GameObject.Find("GameManager").GetComponent<Stage>().stage1;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 	}
 
     public void lookAtLevel()
@@ -244,6 +250,25 @@ public class playerController : MonoBehaviour {
         {
             loadNewLevel();
         }
+        switch(direction)
+        {
+            case 0:
+                gameObject.GetComponent<SpriteRenderer>().sprite = up;
+                break;
+            case 1:
+                gameObject.GetComponent<SpriteRenderer>().sprite = left;
+                break;
+            case 2:
+                gameObject.GetComponent<SpriteRenderer>().sprite = down;
+                break;
+            case 3:
+                gameObject.GetComponent<SpriteRenderer>().sprite = right;
+                break;
+            default:
+                gameObject.GetComponent<SpriteRenderer>().sprite = up;
+                break;
+        }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (direction != 0)
